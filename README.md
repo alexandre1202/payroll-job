@@ -8,9 +8,8 @@
 
 ### Hypothetical Payroll application for employees
 
-* Demo application using Spring Batch.
 * The objective here is investigate how to make this simple Spring Batch application works without a dataSource configuration.
-* But be in mind that the annotation @EnableBatchProcessing use a dataSource and show the following message when we start the application.
+* But be in mind that the annotation @EnableBatchProcessing uses a dataSource and show the following message when we start the application.
 
 ```
 2024-10-11T09:04:48.838-03:00  WARN 69057 --- [payroll-job] [           main] s.c.a.AnnotationConfigApplicationContext : Exception encountered during context initialization - cancelling refresh attempt: org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'jobRepository': Cannot resolve reference to bean 'dataSource' while setting bean property 'dataSource'
