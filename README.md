@@ -6,7 +6,7 @@
 * SLF4J
 * H2 DB
 
-### Payroll application for employees
+### Hypothetical Payroll application for employees
 
 * Demo application using Spring Batch.
 * The objective here is investigate how to make this simple Spring Batch application works without a dataSource configuration.
