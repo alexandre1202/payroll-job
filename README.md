@@ -41,7 +41,7 @@ A component required a bean named 'dataSource' that could not be found.
 
 ### Summary
 
-#### This repos contains an example of Java 17 application with Spring Boot 3.3.4, Gradle, SLF4J Lombok
+#### This repos contains an example of Java 17 application with Spring Boot 3.3.4, Gradle, SLF4J 
 
 ### How to build it
 
