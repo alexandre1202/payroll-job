@@ -1,4 +1,10 @@
-# Alexandre's project
+# Spring Boot
+* Java 17
+* Spring Boot 3.3.4
+* Spring Batch 3.3.4
+* Gradlew
+* SLF4J
+* H2 DB
 
 ### Payroll application for employees
 
