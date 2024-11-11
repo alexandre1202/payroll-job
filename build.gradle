@@ -20,7 +20,14 @@ repositories {
 dependencies {
 
     implementation 'org.springframework.boot:spring-boot-starter'
+    modules {
+        module("org.springframework.boot:spring-boot-starter-logging") {
+            replacedBy("org.springframework.boot:spring-boot-starter-log4j2", "Use Log4j2 instead of Logback")
+        }
+    }
     implementation 'org.springframework.boot:spring-boot-starter-batch'
+
+    implementation 'org.springframework.boot:spring-boot-starter-log4j2'
     implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
 
     implementation 'mysql:mysql-connector-java:8.0.33'  // Use the latest version
@@ -29,9 +36,11 @@ dependencies {
 
     testImplementation 'org.springframework.boot:spring-boot-starter-test'
     testImplementation 'org.springframework.batch:spring-batch-test'
-    testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
+    testImplementation 'org.mockito:mockito-core:5.5.0'                    // Mockito for mocking
+    testImplementation 'org.testng:testng:7.8.0'                           // TestNG for testing framework
+
 }
 
 tasks.named('test') {
-    useJUnitPlatform()
+    useTestNG()
 }

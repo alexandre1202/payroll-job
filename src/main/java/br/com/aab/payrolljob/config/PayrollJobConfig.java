@@ -6,11 +6,9 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.batch.core.Job;
 import org.springframework.batch.core.Step;
-import org.springframework.batch.core.StepContribution;
 import org.springframework.batch.core.configuration.annotation.EnableBatchProcessing;
 import org.springframework.batch.core.job.builder.JobBuilder;
 import org.springframework.batch.core.repository.JobRepository;
-import org.springframework.batch.core.scope.context.ChunkContext;
 import org.springframework.batch.core.step.builder.StepBuilder;
 import org.springframework.batch.core.step.tasklet.Tasklet;
 import org.springframework.batch.repeat.RepeatStatus;
@@ -35,10 +33,10 @@ public class PayrollJobConfig {
     }
 
     @Bean
-    public Job job() {
+    public Job payrollJob(final Step csvStep) {
         LOGGER.info("Creating job");
         return new JobBuilder("PayRollJob", jobRepository)
-                .start(csvStep())
+                .start(csvStep)
                 .build();
     }
 
@@ -49,19 +47,16 @@ public class PayrollJobConfig {
                 .build();
     }
 
-    public static class PrintCsvTasklet implements Tasklet {
-
-        @Override
-        public RepeatStatus execute(StepContribution contribution, ChunkContext chunkContext) throws Exception {
-            readCSVFile();
-            return RepeatStatus.FINISHED;
-        }
-    }
     @Bean
     public Tasklet csvTasklet() {
         LOGGER.info("Tasklet has started!");
-        return (StepContribution contribution, ChunkContext chunkContext) -> {
-            return readCSVFile();
+        return (contribution, chunkContext) -> {
+            try {
+                return readCSVFile();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+            return RepeatStatus.CONTINUABLE;
         };
     }
 
@@ -86,4 +81,5 @@ public class PayrollJobConfig {
             LOGGER.info("\n{} with salary of {} discount of {} bonus {}", name, salary, discount, bonus);
         }
     }
+
 }
